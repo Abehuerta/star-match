@@ -48,7 +48,10 @@ const config = {
             },
             {
                 test: /\.svg$/,
-                use: ['@svgr/webpack'],
+                exclude: /node_modules/,
+                use: {
+                    loader: 'svg-react-loader',
+                },
             }
             // Add your rules for custom modules here
             // Learn more about loaders from https://webpack.js.org/loaders/
