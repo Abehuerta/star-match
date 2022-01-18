@@ -1,5 +1,3 @@
-import { colors } from "../../theme";
-
 const PlayAgain = props => (
     <div className="game-done">
         <div 

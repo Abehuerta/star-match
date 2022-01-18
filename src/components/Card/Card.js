@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import useGameState from '../../hooks/useGameState';
 import { range, sum } from '../../utils';
 import { NumberDisplay } from '../NumberDisplay';
