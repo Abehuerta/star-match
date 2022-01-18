@@ -1,5 +1,3 @@
-import logo from './logo.svg';
-import { Card } from './components/Card';
 import './App.css';
 import { Game } from './components/Game';
 import Splash from './components/Splash/Splash';
