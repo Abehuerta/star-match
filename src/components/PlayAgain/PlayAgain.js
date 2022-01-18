@@ -1,3 +1,4 @@
+import { colors } from "../../theme";
 
 const PlayAgain = props => (
     <div className="game-done">
@@ -7,7 +8,9 @@ const PlayAgain = props => (
         >
             {props.gameStatus === 'lost' ? 'Game Over' : 'Nice'}
         </div>
-        <button onClick={props.onClick}>PlayAgain</button>
+        <button className="number" onClick={props.onClick}>
+            <span className="button-front" style={{ width: 125, height:30, margin: 'auto', fontSize: 20}}>Play Again</span>
+        </button>
     </div>
 );
 

@@ -11,7 +11,6 @@ function App() {
     : splashTime === 0 ? 'finished' : 'fade-out'
 
   useEffect(() => {
-      console.log(splashTime);
       if(splashTime > 0){
           const timerId = setTimeout(() => {
               setSplashTime(splashTime - 1);
