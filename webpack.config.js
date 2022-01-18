@@ -14,7 +14,7 @@ const stylesHandler = 'style-loader';
 const config = {
     entry: './src/index.js',
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'build'),
     },
     devServer: {
         open: true,
@@ -33,22 +33,27 @@ const config = {
             {
                 test: /\.(js|jsx)$/i,
                 loader: 'babel-loader',
-                "presets": [
-                    "@babel/preset-env",
-                   ["@babel/preset-react", {"runtime": "automatic"}]
-                ]
+                options: {
+                    presets: [
+                        "@babel/preset-env",
+                       ["@babel/preset-react", {"runtime": "automatic"}]
+                    ]
+                }
             },
             {
                 test: /\.css$/i,
                 use: [stylesHandler,'css-loader'],
             },
             {
-                test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
+                test: /\.(eot|ttf|woff|woff2|png|jpg|gif)$/i,
                 type: 'asset',
             },
             {
                 test: /\.svg$/,
-                use: ['@svgr/webpack'],
+                exclude: /node_modules/,
+                use: {
+                  loader: 'svg-react-loader',
+                },
             }
             // Add your rules for custom modules here
             // Learn more about loaders from https://webpack.js.org/loaders/
