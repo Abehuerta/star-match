@@ -33,6 +33,10 @@ const config = {
             {
                 test: /\.(js|jsx)$/i,
                 loader: 'babel-loader',
+                "presets": [
+                    "@babel/preset-env",
+                   ["@babel/preset-react", {"runtime": "automatic"}]
+                ]
             },
             {
                 test: /\.css$/i,
@@ -44,7 +48,7 @@ const config = {
             },
             {
                 test: /\.svg$/,
-                use: ['@svgr/webpack', 'url-loader'],
+                use: ['@svgr/webpack'],
             }
             // Add your rules for custom modules here
             // Learn more about loaders from https://webpack.js.org/loaders/
