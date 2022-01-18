@@ -33,17 +33,19 @@ const config = {
             {
                 test: /\.(js|jsx)$/i,
                 loader: 'babel-loader',
-                "presets": [
-                    "@babel/preset-env",
-                   ["@babel/preset-react", {"runtime": "automatic"}]
-                ]
+                options: {
+                    presets: [
+                        "@babel/preset-env",
+                       ["@babel/preset-react", {"runtime": "automatic"}]
+                    ]
+                }
             },
             {
                 test: /\.css$/i,
                 use: [stylesHandler,'css-loader'],
             },
             {
-                test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
+                test: /\.(eot|ttf|woff|woff2|png|jpg|gif)$/i,
                 type: 'asset',
             },
             {
