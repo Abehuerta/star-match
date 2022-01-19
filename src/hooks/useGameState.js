@@ -1,17 +1,22 @@
 import { useState, useEffect } from "react";
 import { random, randomSumIn, range, sum } from "../utils";
 
+export const GAME_STATUS = {
+    PREGAME: 'pregame',
+    ACTIVE: 'active',
+    WON: 'won',
+    LOST: 'lost'
+}
+
 const useGameState = () => {
     const [stars, setStars] = useState(random(1,9));
-    //availableNums
     const [availableNums, setAvailableNums] = useState(range(1,9));
-    //candidateNums
     const [candidateNums, setCandidateNums] = useState([]);
     const [secondsLeft, setSecondsLeft] = useState(10);
+    const [gameStatus, setGameStatus] = useState(GAME_STATUS.PREGAME);
 
     useEffect(() => {
-        console.log('Rendering...');
-        if (secondsLeft > 0 && availableNums.length > 0){
+        if (secondsLeft > 0 && availableNums.length > 0 && gameStatus === GAME_STATUS.ACTIVE){
             const timerId = setTimeout(() =>{
             setSecondsLeft(secondsLeft -1);
             },1000)
@@ -35,7 +40,7 @@ const useGameState = () => {
         }
     } 
 
-    return {stars, availableNums, candidateNums, secondsLeft, setGameState}
+    return {stars, availableNums, candidateNums, secondsLeft, setGameState, gameStatus, setGameStatus}
 }
 
 export default useGameState;

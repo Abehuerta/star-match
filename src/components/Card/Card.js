@@ -3,6 +3,8 @@ import { range, sum } from '../../utils';
 import { NumberDisplay } from '../NumberDisplay';
 import { PlayAgain } from '../PlayAgain';
 import { StarDisplay } from '../StarDisplay';
+import { StartGame } from '../StartGame';
+import { GAME_STATUS } from '../../hooks/useGameState';
 
 
 const Card = (props) => {
@@ -12,13 +14,19 @@ const Card = (props) => {
         availableNums,
         candidateNums,
         secondsLeft,
-        setGameState
+        setGameState,
+        gameStatus, setGameStatus
     } = useGameState();
 
     const candidatesAreWrong = sum(candidateNums) > stars;
-    const gameStatus = availableNums.length === 0
-        ? 'won'
-        : secondsLeft === 0 ? 'lost' : 'active'
+
+    if(gameStatus === GAME_STATUS.ACTIVE){
+        if(secondsLeft === 0){
+            setGameStatus(GAME_STATUS.LOST);
+        }else if(availableNums.length === 0){
+            setGameStatus(GAME_STATUS.WON);
+        }
+    }
 
     const numberStatus = (number) => {
         if(!availableNums.includes(number)) {
@@ -49,7 +57,9 @@ const Card = (props) => {
         <div className='card'>
             <div className='card-forefront'>
                 <div className='card-header'>
-                    {gameStatus !== 'active' ? (
+                    { gameStatus === GAME_STATUS.PREGAME ? (
+                        <StartGame startGame={() => setGameStatus(GAME_STATUS.ACTIVE)} />
+                    ) : gameStatus !== GAME_STATUS.ACTIVE ? (
                         <PlayAgain onClick={props.startNewGame} gameStatus={gameStatus}/>
                     ) : (
                         <StarDisplay count={stars} />
